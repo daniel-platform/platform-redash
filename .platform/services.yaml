@@ -1,0 +1,8 @@
+postgres:
+  size: S
+  type: postgresql:11
+  disk: 1024
+
+redis:
+  size: S
+  type: redis:3.2

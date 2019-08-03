@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Load header
+. ./header.inc
+
+# Load startup options
+. ./start.inc
+
+cd $REDASH_HOME; exec ${REDASH_HOME}/manage.py $@
+

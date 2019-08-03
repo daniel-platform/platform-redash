@@ -1,0 +1,52 @@
+name: "redash"
+
+type: "python:2.7"
+
+dependencies:
+  python2:
+    urlparse2: "*"
+    ConfigParser: "*"
+    mysql-python: "1.2.5"
+    google-api-python-client: "1.5.1"
+    oauth2client: "3.0.0"
+    gspread: "3.1.0"
+
+hooks:
+  build: "bash ${PLATFORM_APP_DIR}/build.sh"
+
+disk: 1024
+
+relationships:
+  config: "postgres:postgresql"
+  cache: "redis:redis"
+
+mounts:
+  nvs:
+    source: local
+    source_path: nvs
+
+web:
+  commands:
+    start: "sh ./start.sh"
+  locations:
+    "/":
+      root: "redash"
+      passthru: true
+      allow: false
+
+workers:
+  worker:
+    size: M
+    commands:
+      start: "sh ./worker.sh"        
+  scheduler:
+    commands:
+      start: "sh ./scheduler.sh"
+
+variables:
+  env:
+    REDASH_WEB_WORKERS: 4
+    REDASH_LOG_LEVEL: "INFO"
+    WORKERS_COUNT: 2
+    SCHEDULERS_COUNT: 1
+
