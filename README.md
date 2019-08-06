@@ -12,6 +12,7 @@ Needs no less than an Medium plan to function properly.
 - Create a new project.
 - Clone & Deploy this repository.
 - SSH into the main application and run `./manage database create_tables` to initialize the database
+- Setup an environmental variable for `REDASH_MAIL_DEFAULT_SENDER`.
 - Visit your applications web URL and follow the on-screen instrucions to complete setup
 - Enjoy.
 
